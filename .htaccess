@@ -1,0 +1,18 @@
+# เปิดใช้การเขียน URL
+RewriteEngine On
+
+# ซ่อนนามสกุล .php สำหรับโฟลเดอร์ pages
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f 
+RewriteRule ^pages/(.+)$ pages/$1.php [L]
+
+# ซ่อนนามสกุล .php ทั่วไป
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/.]+)$ $1.php [L]
+
+# ตั้งค่าโฟลเดอร์ย่อยให้ใช้งานได้เหมือนกัน
+RewriteCond %{REQUEST_FILENAME}/ -d
+RewriteRule ^(.+)/$ $1 [L]
+
+# หน้าแรกของเว็บไซต์  
+DirectoryIndex login.php
